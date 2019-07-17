@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+</head>
+<body>
+<form method="post" action="/login">
+    <h2 class="form-signin-heading">登录</h2>
+    <span th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+    <p>
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" required autofocus>
+    </p>
+    <p>
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" required>
+    </p>
+    <p>
+        <label for="imageCode">图形验证码</label>
+        <input type="input" id="imageCode" name="imageCode" required>
+        <img src="/code/image"/>
+    </p>
+    <input type="checkbox" name="remember-me"/>记住我<br>
+    <button type="submit">登录</button>
+    <p>
+        <label for="imageCode">短信验证码</label>
+        <input type="input" id="smsCode" name="smsCode" required>
+        <button onclick="getSmsCode()">获取验证码</button>
+    </p>
+</form>
+<script>
+    function getSmsCode() {
+        var ajax = new XMLHttpRequest();
+        ajax.open('get', '/code/sms');
+        ajax.send();
+    }
+</script>
+</body>
+</html>

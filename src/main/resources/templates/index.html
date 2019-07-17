@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <p>登录名：<span sec:authentication="name"></span></p>
+    <p>角色：<span sec:authentication="principal.authorities"></span></p>
+    <p>Username：<span sec:authentication="principal.username"></span></p>
+
+
+    <div sec:authorize="hasAuthority('ROLE_user:view:GET')">用户列表</div>
+    <div sec:authorize="hasRole('user:add:POST')">添加用户</div>
+    <div sec:authorize="hasAuthority('ROLE_user:update:PUT')">修改用户</div>
+    <div sec:authorize="hasAuthority('ROLE_user:delete:DELETE')">删除用户</div>
+</div>
+<script>
+</script>
+</body>
+</html>
